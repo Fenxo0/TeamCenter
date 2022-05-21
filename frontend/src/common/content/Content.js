@@ -29,7 +29,6 @@ class Content extends Component {
                         validationSchema ={VALIDATION_SEARCH}
                         onSubmit={(values, {setSubmitting, resetForm}) => {
                             console.log(JSON.stringify(values));
-                            debugger
                             this.changeSearchOptions(values);
                         }}
                     >
@@ -177,7 +176,6 @@ class Content extends Component {
                         <ItemList type={"ALL_OFFERS"}/>
                     )
                 }
-
             </Container>
         )
     }

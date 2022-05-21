@@ -27,6 +27,25 @@ let request = (options, contentType={'Content-Type': 'application/json'}) => {
     );
 };
 
+let requestJSON = (options, contentType={'Content-Type': 'application/json'}) => {
+
+    const headers = new Headers(contentType)
+
+    const defaults = {headers: headers};
+    options = Object.assign({}, defaults, options);
+
+    return fetch(options.url, options)
+        .then(response =>
+            response.json().then(json => {
+                if(!response.ok) {
+                    return Promise.reject(json);
+                }
+                return json;
+            })
+        );
+};
+
+
 export function login(loginRequest) {
     return request({
         url: API_BASE_URL + '/login',
@@ -43,9 +62,9 @@ export function getAllItems() {
 }
 
 export function executeSavedQueries(executeSavedQueriesRequest) {
-    return request({
+    return requestJSON({
         url: API_BASE_URL + '/executeSavedQueries',
-        method: 'POST',
+        method: 'GET',
         body: JSON.stringify(executeSavedQueriesRequest)
     });
 }
