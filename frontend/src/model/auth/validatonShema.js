@@ -13,3 +13,10 @@ export const VALIDATION_LOGIN_SCHEMA = Yup.object().shape({
         .max(PASSWORD_MAX_LENGTH, "Пароль должен содержать не более " + PASSWORD_MAX_LENGTH + " символов")
         .required("*Это обязательное поле")
 });
+
+export const VALIDATION_SEARCH = Yup.object().shape({
+    id: Yup.string()
+        .min(PASSWORD_MIN_LENGTH, "Id должен состоять не меньше, чем из одного символа"),
+    password: Yup.string()
+        .min(PASSWORD_MIN_LENGTH, "Имя должно состоять не меньше, чем из одного символа")
+});

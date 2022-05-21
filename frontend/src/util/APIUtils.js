@@ -31,7 +31,21 @@ export function login(loginRequest) {
     return request({
         url: API_BASE_URL + '/login',
         method: 'POST',
-        //mode: 'no-cors',
         body: JSON.stringify(loginRequest)
+    });
+}
+
+export function getAllItems() {
+    return request({
+        url: API_BASE_URL + '/getSavedQueries',
+        method: 'GET'
+    });
+}
+
+export function executeSavedQueries(executeSavedQueriesRequest) {
+    return request({
+        url: API_BASE_URL + '/executeSavedQueries',
+        method: 'POST',
+        body: JSON.stringify(executeSavedQueriesRequest)
     });
 }
