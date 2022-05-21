@@ -8,4 +8,6 @@ public interface TeamcenterService {
 
     ResponseModel login(String username, String password);
     ResponseModel getSavedQueries(String session);
+
+    ResponseModel executeSavedQueries(String session, String id, String name);
 }

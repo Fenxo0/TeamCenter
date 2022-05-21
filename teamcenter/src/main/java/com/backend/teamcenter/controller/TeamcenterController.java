@@ -1,5 +1,6 @@
 package com.backend.teamcenter.controller;
 
+import com.backend.teamcenter.model.ExecuteSavedQueriesRequest;
 import com.backend.teamcenter.model.RequestModel;
 import com.backend.teamcenter.service.TeamcenterService;
 import org.springframework.http.HttpStatus;
@@ -25,5 +26,15 @@ public class TeamcenterController {
     @GetMapping("/getSavedQueries")
     ResponseEntity<?> getSavedQueries(@RequestHeader("Session") String session) {
         return null;
+    }
+
+    @GetMapping("/executeSavedQueries")
+    ResponseEntity<?> executeSavedQueries(@RequestHeader("Session") String session,
+                                          @RequestBody ExecuteSavedQueriesRequest request) {
+        var response = teamcenterService.executeSavedQueries(session,
+                                                                          request.getId(),
+                                                                          request.getName());
+        //System.out.println(response);
+        return new ResponseEntity<>(response.getObjectModel(), response.getHeaders(), HttpStatus.OK);
     }
 }
