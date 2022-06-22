@@ -31,10 +31,12 @@ class LoginForm extends Component {
                           setSubmitting(true);*/
                         login(values)
                             .then(response => {
-                                const parser = new DOMParser();
-                                const xmlDOM = parser.parseFromString(response, "text/xml")
-                                const value = xmlDOM.getElementsByTagName("ns1:properties");
-                                localStorage.setItem('Name', value[28].outerHTML.toString().split('"')[7]);
+                                localStorage.setItem('Name', response.name);
+                                localStorage.setItem('Group', response.group);
+                                localStorage.setItem('HomeFolder', response.homeFolder);
+                                localStorage.setItem('Project', response.project);
+                                localStorage.setItem('Id', response.id);
+                                localStorage.setItem('LicenseLevel', response.licenseLevel);
                                 this.props.onLogin();
                             }).catch(error => {
                             if(error.status === 401) {

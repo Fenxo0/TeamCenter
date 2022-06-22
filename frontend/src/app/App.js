@@ -15,6 +15,8 @@ import Content from "../common/content/Content";
 import {toast} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
 import Footer from "../common/footer/Footer";
+import PDFViewer from './AllPages';
+import AllPages from './AllPages';
 
 toast.configure()
 
@@ -58,6 +60,11 @@ class App extends Component {
                     <div className="auth-inner">
                         <Switch>
                             <Route exact path='/' component={Content}/>
+                            <Route path="/intstruction/:pdfName"
+                                   render={
+                                       (props) =>
+                                           <AllPages {...props} />
+                                   }/>
                             <Route path="/login"
                                    render={
                                        (props) =>

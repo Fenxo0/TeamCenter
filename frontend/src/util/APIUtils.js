@@ -6,7 +6,7 @@ let request = (options, contentType={'Content-Type': 'application/json'}) => {
     const headers = new Headers(contentType)
 
     if(localStorage.getItem("Session")) {
-        headers.append('Set-Cookie', localStorage.getItem("Session"))
+        headers.append('Session', localStorage.getItem("Session"))
     }
     headers.append('Access-Control-Allow-Origin', '*')
     headers.append('X-Requested-With', 'XMLHttpRequest')
@@ -16,9 +16,8 @@ let request = (options, contentType={'Content-Type': 'application/json'}) => {
 
     return fetch(options.url, options)
         .then((response) =>  
-            response.text().then(text => {
-            debugger
-            localStorage.setItem("Session", response.headers.get("Session").match('[^=]*$'))
+            response.json().then(text => {
+            localStorage.setItem("Session", response.headers.get("Session"))
             if(!response.ok) {
                 return Promise.reject(text);
             }
@@ -27,22 +26,26 @@ let request = (options, contentType={'Content-Type': 'application/json'}) => {
     );
 };
 
-let requestJSON = (options, contentType={'Content-Type': 'application/json'}) => {
+async function requestJSON (options) {
 
+    let contentType={'Content-Type': 'application/json'}
     const headers = new Headers(contentType)
 
     const defaults = {headers: headers};
+    if(localStorage.getItem("Session")) {
+        headers.append('Session', localStorage.getItem("Session"))
+    }
     options = Object.assign({}, defaults, options);
 
-    return fetch(options.url, options)
+    return await fetch(options.url, options)
         .then(response =>
-            response.json().then(json => {
+             response.json().then(json => {
                 if(!response.ok) {
                     return Promise.reject(json);
                 }
                 return json;
             })
-        );
+        ).catch((e) => console.log((e)));
 };
 
 
@@ -61,10 +64,17 @@ export function getAllItems() {
     });
 }
 
-export function executeSavedQueries(executeSavedQueriesRequest) {
+export async function executeSavedQueries(executeSavedQueriesRequest) {
     return requestJSON({
         url: API_BASE_URL + '/executeSavedQueries',
-        method: 'GET',
+        method: 'POST',
         body: JSON.stringify(executeSavedQueriesRequest)
+    });
+}
+
+export function opnePdf(pdfName) {
+    return requestJSON({
+        url: "http://localhost:9090" + '/instruction/' + 'pdfName',
+        method: 'POST'
     });
 }

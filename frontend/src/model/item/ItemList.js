@@ -1,97 +1,90 @@
 import { Component } from "react";
-import { Alert } from "react-bootstrap";
+import { Alert, Button } from "react-bootstrap";
 import { executeSavedQueries } from "../../util/APIUtils";
+import React from 'react';
+import {
+    Accordion,
+    AccordionItem,
+    AccordionItemHeading,
+    AccordionItemButton,
+    AccordionItemPanel,
+} from 'react-accessible-accordion';
+
+import 'react-accessible-accordion/dist/fancy-example.css';
 
 class ItemList extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            items: "",
-            page: 0,
+            items: [],
+            users: [],
+            groups: [],
+            showModal: false,
             size: 10,
             totalElements: 0,
             totalPages: 0,
-            last: true,
+            open: true,
             currentVotes: [],
             isLoading: false
         };
-        this.loadAllUsers = this.loadAllUsers.bind(this);
         this.runHolder = this.runHolder;
         this.loadItemList = this.loadItemList.bind(this);
         this.handleLoadMore = this.handleLoadMore.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+        this.close = this.close.bind(this);
+        this.open = this.open.bind(this);
     }
 
-    loadAllUsers(page = 0, size = USER_LIST_SIZE) {
-        let promise;
-        promise = getAllUsers(page, size);
+    close(){
+        this.setState({ showModal: false });
+    }
 
-        if(!promise) {
-            return;
+    open(){
+        this.setState({ showModal: true });
+    }
+
+    handleClick() {
+        this.setState(prevState => ({
+          isToggleOn: !prevState.isToggleOn
+        }));
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+          panel.style.display = "none";
+        } else {
+          panel.style.display = "block";
         }
+      }
 
-        this.setState({
-            isLoading: true
-        });
-
-        promise
-            .then(response => {
-                const users = this.state.users.slice();
-
-                this.setState({
-                    users: users.concat(response.content),
-                    page: response.page,
-                    size: response.size,
-                    totalElements: response.totalElements,
-                    totalPages: response.totalPages,
-                    last: response.last,
-                    isLoading: false
-                })
-                console.log(this.state.users);
-            }).catch(error => {
-            this.setState({
-                isLoading: false
-            })
-        });
-    }
-
-    loadItemList() {
-        let promise;
-
+    async loadItemList() {
         if (this.props.searchOptions) {
-            promise = executeSavedQueries(this.props.searchOptions);
+            console.log(this.props.searchOptions)
+            await executeSavedQueries(this.props.searchOptions)
+                .then(response => {
+                    this.setState({
+                        items: new Map(Object.entries(response.objects)),
+                        users: response.users,
+                        groups: response.groups,
+                        isLoading: false
+                    })
+                    debugger
+                    console.log(this.state.items)
+                });
         }
-        if (!promise) {
-            return;
-        }
-
-        //this.setState({
-        //    isLoading: true
-        //});
-
-        promise
-            .then(response => {
-
-                this.setState({
-                    items: items.concat(response.content),
-                    isLoading: false
-                })
-            }).catch(error => {
-            this.setState({
-                isLoading: false
-            })
-        });
     }
 
     handleLoadMore() {
         this.loadItemList(this.state.page + 1);
     }
 
-    componentDidUpdate(nextProps) {
-        debugger
+    async componentDidUpdate(nextProps) {
+        //debugger
         if (localStorage.getItem("Session") === null) {
             // Reset State
             this.setState({
                 items: [],
+                users: [],
+                groups: [],
+                showModal: false,
                 page: 0,
                 size: 10,
                 totalElements: 0,
@@ -102,13 +95,90 @@ class ItemList extends Component {
             });
             return
         }
-        this.loadItemList();
+        if (this.state.items.length === 0) {
+            await this.loadItemList();
+            console.log(this.state.items)
+        }
     }
 
     render() {
+        let array = [], values = [], valuesUsers =[], valuesGroups = [], count = 0, showModal = false
+        const {users, groups} = this.state
+        this.state.items.forEach(function(value, key) {
+            value.split(';').forEach(v => values.push(v))
+            users[count].split(';').forEach(u => valuesUsers.push(u))
+            groups[count].split(';').forEach(g => valuesGroups.push(g))
+            array.push(
+                <AccordionItem>
+                <AccordionItemHeading>
+                    <AccordionItemButton>
+                        {key}
+                    </AccordionItemButton>
+                </AccordionItemHeading>
+                <AccordionItemPanel>
+                    {values[0]}
+                </AccordionItemPanel>
+                <AccordionItemPanel>
+                <AccordionItem>
+                    <AccordionItemButton>
+                        {values[1]}
+                    </AccordionItemButton>
+                    <AccordionItemPanel>
+                        {valuesGroups[0]}
+                    </AccordionItemPanel>
+                    <AccordionItemPanel>
+                        {valuesGroups[1]}
+                    </AccordionItemPanel>
+                    <AccordionItemPanel>
+                        {valuesGroups[2]}
+                    </AccordionItemPanel>
+                    </AccordionItem>
+                </AccordionItemPanel>
+                <AccordionItemPanel>
+                    {values[2]}
+                </AccordionItemPanel>
+                <AccordionItemPanel>
+                    <AccordionItem>
+                    <AccordionItemButton>
+                        {values[3]}
+                    </AccordionItemButton>
+                    <AccordionItemPanel>
+                        {valuesUsers[0]}
+                    </AccordionItemPanel>
+                    <AccordionItemPanel>
+                        {valuesUsers[1]}
+                    </AccordionItemPanel>
+                    <AccordionItemPanel>
+                        {valuesUsers[2]}
+                    </AccordionItemPanel>
+                    <AccordionItemPanel>
+                        {valuesUsers[3]}
+                    </AccordionItemPanel>
+                    <AccordionItemPanel>
+                        {valuesUsers[4]}
+                    </AccordionItemPanel>
+                    <AccordionItemPanel>
+                        {valuesUsers[5]}
+                    </AccordionItemPanel>
+                    <AccordionItemPanel>
+                        {valuesUsers[6]}
+                    </AccordionItemPanel>
+                    <AccordionItemPanel>
+                        {valuesUsers[7]}
+                    </AccordionItemPanel>
+                    </AccordionItem>
+                </AccordionItemPanel>  
+                <AccordionItemPanel>
+                <d>Инструкции к данной детали - </d>
+                <Button to="route" target="_blank" onClick={() => {window.open("http://localhost:9090/intstruction/" + valuesUsers[8])}} > {valuesUsers[8]} </Button>
+                </AccordionItemPanel>  
+            </AccordionItem>,
+           )
+           values.length = 0
+           if (count !== 12) count++
+        })
         return (
-            <div className="my-items">
-                {this.state.items}
+            <div>
                 {
                 !this.state.isLoading && this.state.items.length === 0 ? (
                     <div className="no-items-found">
@@ -119,7 +189,9 @@ class ItemList extends Component {
                             </p>
                         </Alert>
                     </div>
-                ) : null
+                ) : <Accordion allowMultipleExpanded preExpanded={[0]}>
+                    {array}
+                </Accordion>
             }
             </div>
         )

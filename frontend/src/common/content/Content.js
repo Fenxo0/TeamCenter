@@ -11,6 +11,7 @@ class Content extends Component {
         this.state = {
             searchOptions: null,
         }
+        //localStorage.clear()
         this.changeSearchOptions = this.changeSearchOptions.bind(this);
     }
 
@@ -79,88 +80,19 @@ class Content extends Component {
                                                 onChange={handleChange}
                                             >
                                                 <option value="11" data-marker="option(9)">Item_Name_or_ID</option>
-                                                <option value="12" data-marker="option(14)">Мотоциклы и мототехника</option>
-                                                <option value="13" data-marker="option(81)">Грузовики и спецтехника</option>
-                                                <option value="14" data-marker="option(11)">Водный транспорт</option>
-                                                <option value="15" data-marker="option(10)">Запчасти и аксессуары</option>
-                                                <option value="2" className="category-select-group-y6FfI"
-                                                        data-marker="option(4)">Недвижимость
-                                                </option>
-                                                <option value="21" data-marker="option(24)">Квартиры</option>
-                                                <option value="22" data-marker="option(23)">Комнаты</option>
-                                                <option value="23" data-marker="option(25)">Дома, дачи, коттеджи</option>
-                                                <option value="24" data-marker="option(85)">Гаражи и машиноместа</option>
-                                                <option value="25" data-marker="option(26)">Земельные участки</option>
-                                                <option value="26" data-marker="option(42)">Коммерческая недвижимость
-                                                </option>
-                                                <option value="27" data-marker="option(86)">Недвижимость за рубежом</option>
-                                                <option value="3" className="category-select-group-y6FfI"
-                                                        data-marker="option(110)">Работа
-                                                </option>
-                                                <option value="31" data-marker="option(111)">Вакансии</option>
-                                                <option value="32" data-marker="option(112)">Резюме</option>
-                                                <option value="4" className="category-select-group-y6FfI"
-                                                        data-marker="option(114)">Услуги
-                                                </option>
-                                                <option value="5" className="category-select-group-y6FfI"
-                                                        data-marker="option(5)">Личные вещи
-                                                </option>
-                                                <option value="51" data-marker="option(27)">Одежда, обувь, аксессуары
-                                                </option>
-                                                <option value="52" data-marker="option(29)">Детская одежда и обувь</option>
-                                                <option value="53" data-marker="option(30)">Товары для детей и игрушки
-                                                </option>
-                                                <option value="54" data-marker="option(28)">Часы и украшения</option>
-                                                <option value="55" data-marker="option(88)">Красота и здоровье</option>
-                                                <option value="6" className="category-select-group-y6FfI"
-                                                        data-marker="option(2)">Для дома и дачи
-                                                </option>
-                                                <option value="61" data-marker="option(21)">Бытовая техника</option>
-                                                <option value="62" data-marker="option(20)">Мебель и интерьер</option>
-                                                <option value="63" data-marker="option(87)">Посуда и товары для кухни
-                                                </option>
-                                                <option value="64" data-marker="option(82)">Продукты питания</option>
-                                                <option value="65" data-marker="option(19)">Ремонт и строительство</option>
-                                                <option value="66" data-marker="option(106)">Растения</option>
-                                                <option value="7" className="category-select-group-y6FfI"
-                                                        data-marker="option(6)">Бытовая электроника
-                                                </option>
-                                                <option value="71" data-marker="option(32)">Аудио и видео</option>
-                                                <option value="72" data-marker="option(97)">Игры, приставки и программы
-                                                </option>
-                                                <option value="73" data-marker="option(31)">Настольные компьютеры</option>
-                                                <option value="74" data-marker="option(98)">Ноутбуки</option>
-                                                <option value="75" data-marker="option(99)">Оргтехника и расходники</option>
-                                                <option value="76" data-marker="option(96)">Планшеты и электронные книги
-                                                </option>
-                                                <option value="77" data-marker="option(84)">Телефоны</option>
-                                                <option value="78" data-marker="option(101)">Товары для компьютера</option>
-                                                <option value="79" data-marker="option(105)">Фототехника</option>
-                                                <option value="8" className="category-select-group-y6FfI"
-                                                        data-marker="option(7)">Хобби и отдых
-                                                </option>
-                                                <option value="81" data-marker="option(33)">Билеты и путешествия</option>
-                                                <option value="82" data-marker="option(34)">Велосипеды</option>
-                                                <option value="83" data-marker="option(83)">Книги и журналы</option>
-                                                <option value="84" data-marker="option(36)">Коллекционирование</option>
-                                                <option value="85" data-marker="option(38)">Музыкальные инструменты</option>
-                                                <option value="86" data-marker="option(102)">Охота и рыбалка</option>
-                                                <option value="87" data-marker="option(39)">Спорт и отдых</option>
-                                                <option value="9" className="category-select-group-y6FfI"
-                                                        data-marker="option(35)">Животные
-                                                </option>
-                                                <option value="91" data-marker="option(89)">Собаки</option>
-                                                <option value="92" data-marker="option(90)">Кошки</option>
-                                                <option value="93" data-marker="option(91)">Птицы</option>
-                                                <option value="94" data-marker="option(92)">Аквариум</option>
-                                                <option value="95" data-marker="option(93)">Другие животные</option>
-                                                <option value="96" data-marker="option(94)">Товары для животных</option>
-                                                <option value="a" className="category-select-group-y6FfI"
-                                                        data-marker="option(8)">Готовый бизнес и оборудование
-                                                </option>
-                                                <option value="a1" data-marker="option(116)">Готовый бизнес</option>
-                                                <option value="a2" data-marker="option(40)">Оборудование для бизнеса
-                                                </option>
+                                                <option value="12" data-marker="option(14)">RoleByName</option>
+                                                <option value="13" data-marker="option(81)">GroupByName</option>
+                                                <option value="14" data-marker="option(11)">__Item_Revision_name_or_ID</option>
+                                                <option value="15" data-marker="option(10)">__WorklistUserPoolSchedTasks</option>
+                                                <option value="21" data-marker="option(24)">Audit - Project Based Logs</option>
+                                                <option value="22" data-marker="option(23)">Items_ref_by_ReportDefinition</option>
+                                                <option value="23" data-marker="option(25)">__Find_owning_groups_of_given_role</option>
+                                                <option value="24" data-marker="option(85)">__EventTypeMapping</option>
+                                                <option value="25" data-marker="option(26)">Audit - Workflow Detailed</option>
+                                                <option value="26" data-marker="option(42)">Audit - Workflow Summary</option>
+                                                <option value="27" data-marker="option(86)">Audit - Workflow General</option>
+                                                <option value="31" data-marker="option(111)">Audit - Workflow Signoff</option>
+                                                <option value="32" data-marker="option(112)">Material Management - Substances</option>
                                             </Form.Control>
                                         </Form.Group>
                                     </Form.Row>
