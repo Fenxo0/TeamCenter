@@ -20,7 +20,7 @@ public class TeamcenterController {
     ResponseEntity<?> login(@RequestBody RequestModel request) {
         var response = teamcenterService.login(request.getUsername(), request.getPassword());
         //System.out.println(response);
-        return new ResponseEntity<>(response.getBody(), response.getHeaders(), HttpStatus.OK);
+        return new ResponseEntity<>(response.getUser(), response.getHeaders(), HttpStatus.OK);
     }
 
     @GetMapping("/getSavedQueries")
@@ -28,7 +28,7 @@ public class TeamcenterController {
         return null;
     }
 
-    @GetMapping("/executeSavedQueries")
+    @PostMapping("/executeSavedQueries")
     ResponseEntity<?> executeSavedQueries(@RequestHeader("Session") String session,
                                           @RequestBody ExecuteSavedQueriesRequest request) {
         var response = teamcenterService.executeSavedQueries(session,
@@ -36,5 +36,13 @@ public class TeamcenterController {
                                                                           request.getName());
         //System.out.println(response);
         return new ResponseEntity<>(response.getObjectModel(), response.getHeaders(), HttpStatus.OK);
+    }
+
+    @PostMapping("/getDatasets")
+    ResponseEntity<?> getDatasets(@RequestBody String itemId,
+                                  @RequestBody String revId) throws Exception {
+        var response = teamcenterService.getDatasets(itemId, revId);
+        //System.out.println(response);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

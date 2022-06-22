@@ -14,6 +14,13 @@ public class ResponseModel {
     private String body;
     private ObjectModel objectModel;
 
+    private UserTC user;
+
+    public ResponseModel(HttpHeaders headers, UserTC user) {
+        this.headers = headers;
+        this.user = user;
+    }
+
     public ResponseModel(HttpHeaders headers,
                          ObjectModel objectModel) {
         this.headers = headers;
