@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Alert, Button } from "react-bootstrap";
 import { executeSavedQueries } from "../../util/APIUtils";
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Accordion,
     AccordionItem,
@@ -70,6 +70,28 @@ class ItemList extends Component {
                     console.log(this.state.items)
                 });
         }
+
+        //this.setState({
+        //    isLoading: true
+        //});
+
+        //this.setState({
+        //    items: promise.object,
+        //    isLoading: false
+        //})
+        //promise
+        //    .then(response => {
+        //        console.log(response.content)
+        //        const items = this.state.items.slice();
+        //        this.setState({
+        //            items: response.content,
+        //            isLoading: false
+        //        })
+        //    }).catch(error => {
+        //    this.setState({
+        //        isLoading: false
+        //    })
+        //});
     }
 
     handleLoadMore() {
@@ -170,7 +192,9 @@ class ItemList extends Component {
                 </AccordionItemPanel>  
                 <AccordionItemPanel>
                 <d>Инструкции к данной детали - </d>
-                <Button to="route" target="_blank" onClick={() => {window.open("http://localhost:9090/intstruction/" + valuesUsers[8])}} > {valuesUsers[8]} </Button>
+                <Button to="route" target="_blank" onClick={() => {window.open("http://localhost:9090/intstruction/Chertezh.pdf")}} > Чертеж.pdf </Button>
+                <d>         </d>
+                <Button to="route" target="_blank" onClick={() => {window.open("http://localhost:9090/intstruction/PSE-A-75-00-01-00R-720A-A.pdf")}} > PSE-A-75-00-01-00R-720A-A.pdf </Button>
                 </AccordionItemPanel>  
             </AccordionItem>,
            )
