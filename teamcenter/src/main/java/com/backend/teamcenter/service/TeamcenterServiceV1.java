@@ -24,10 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -160,7 +157,7 @@ public class TeamcenterServiceV1 implements TeamcenterService {
     @Override
     public ResponseModel executeSavedQueries(String session, String id, String name) {
         ObjectModel objectModel = new ObjectModel();
-        Map<String, String> objects = new HashMap<>();
+        Map<String, String> objects = new LinkedHashMap<>();
         List<String> users = new ArrayList<>();
         List<String> groups = new ArrayList<>();
         Document doc;
@@ -296,9 +293,9 @@ public class TeamcenterServiceV1 implements TeamcenterService {
                                 user = objectElement.getAttribute("uiValue");
                                 Element userElement;
                                 if (desc != null && desc.equals("94-10-965")) {
-                                    userElement = (Element) newElement.getElementsByTagName("ns0:values").item(10);
+                                    userElement = (Element) newElement.getElementsByTagName("ns0:values").item(8);
                                 } else {
-                                    userElement = (Element) newElement.getElementsByTagName("ns0:values").item(9);
+                                    userElement = (Element) newElement.getElementsByTagName("ns0:values").item(10);
                                 }
                                 String uuidUser = userElement.getAttribute("value");
                                 if (!uuidUser.equals("SPB5_Doc") && !uuidUser.equals("P181_СР-P181 Спецификация распределения")) {
@@ -435,7 +432,6 @@ public class TeamcenterServiceV1 implements TeamcenterService {
         Node node = doc.getElementsByTagName("ns0:dataObjects").item(0);
         Element newElement = (Element) node;
         String fullName = null, name = null, description = "", userProjects = null, person = null;
-        System.out.println(uidGroup);
         if (newElement != null) {
             for (int j = 0; j < newElement.getElementsByTagName("ns0:properties").getLength(); j++) {
                 Element objectElement = (Element) newElement.getElementsByTagName("ns0:properties").item(j);

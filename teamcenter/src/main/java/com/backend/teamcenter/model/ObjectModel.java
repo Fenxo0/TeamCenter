@@ -5,10 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Data
 @ToString
@@ -16,7 +13,7 @@ import java.util.Map;
 @NoArgsConstructor
 public class ObjectModel {
 
-    private Map<String, String> objects = new HashMap<>();
+    private Map<String, String> objects = new LinkedHashMap<>();
     private List<String> users = new ArrayList<>();
     private List<String> groups = new ArrayList<>();
 

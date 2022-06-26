@@ -39,11 +39,7 @@ class Content extends Component {
                                 )
                             } else {
                                 debugger
-                                this.state.arrayItems = []
-                                this.state.arrayItems.push(
-                                    <ItemList searchOptions={values}/>
-                                )
-                                //this.changeSearchOptions(values);
+                                this.changeSearchOptions(values);
                             }
                         }}
                     >
@@ -115,9 +111,7 @@ class Content extends Component {
                         )}
                     </Formik>
                 </Container>
-                {
-                    this.state.arrayItems
-                }
+                <ItemList searchOptions={this.state.searchOptions}/>
             </Container>
         )
     }

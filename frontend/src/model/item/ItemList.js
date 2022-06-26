@@ -56,7 +56,6 @@ class ItemList extends Component {
       }
 
     async loadItemList() {
-        debugger
         if (this.props.searchOptions) {
             console.log(this.props.searchOptions)
             await executeSavedQueries(this.props.searchOptions)
@@ -67,7 +66,6 @@ class ItemList extends Component {
                         groups: response.groups,
                         isLoading: false
                     })
-                    debugger
                     console.log(this.state.items)
                 });
         }
@@ -100,7 +98,6 @@ class ItemList extends Component {
     }
 
     async componentDidUpdate(nextProps) {
-        //debugger
         if (localStorage.getItem("Session") === null) {
             // Reset State
             this.setState({
@@ -264,12 +261,15 @@ class ItemList extends Component {
             </AccordionItem>,
            )}
            values.length = 0
+           valuesUsers.length = 0
+           valuesGroups.length = 0
            if (count !== 11) count++
         })
+        this.state.items.length = 0
         return (
             <div>
                 {
-                !this.state.isLoading && this.state.items.length === 0 ? (
+                !this.state.isLoading && array.length === 0 ? (
                     <div className="no-items-found">
                         <Alert variant="success">
                             <Alert.Heading>Детали</Alert.Heading>
