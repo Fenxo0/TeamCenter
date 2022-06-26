@@ -13,8 +13,22 @@ export const VALIDATION_LOGIN_SCHEMA = Yup.object().shape({
 });
 
 export const VALIDATION_SEARCH = Yup.object().shape({
-    id: Yup.string()
-        .min(PASSWORD_MIN_LENGTH, "Id должен состоять не меньше, чем из одного символа"),
-    password: Yup.string()
-        .min(PASSWORD_MIN_LENGTH, "Имя должно состоять не меньше, чем из одного символа")
+    id: Yup
+    .string()
+    .test(
+        'oneOfRequired',
+        'One of id or name must be entered',
+        function(item) {
+          return (this.parent.id || this.parent.name)
+        }
+      ),
+    name: Yup
+    .string()
+    .test(
+      'oneOfRequired',
+      'One of id or name must be entered',
+      function(item) {
+        return (this.parent.id || this.parent.name)
+      }
+    )
 });

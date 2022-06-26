@@ -56,6 +56,7 @@ class ItemList extends Component {
       }
 
     async loadItemList() {
+        debugger
         if (this.props.searchOptions) {
             console.log(this.props.searchOptions)
             await executeSavedQueries(this.props.searchOptions)
@@ -130,6 +131,76 @@ class ItemList extends Component {
             value.split(';').forEach(v => values.push(v))
             users[count].split(';').forEach(u => valuesUsers.push(u))
             groups[count].split(';').forEach(g => valuesGroups.push(g))
+            if (key === "DEMO-965-Распределительное устройство ПОС") {
+                array.push(
+                    <AccordionItem>
+                    <AccordionItemHeading>
+                        <AccordionItemButton>
+                            {key}
+                        </AccordionItemButton>
+                    </AccordionItemHeading>
+                    <AccordionItemPanel>
+                        {values[0]}
+                    </AccordionItemPanel>
+                    <AccordionItemPanel>
+                    <AccordionItem>
+                        <AccordionItemButton>
+                            {values[1]}
+                        </AccordionItemButton>
+                        <AccordionItemPanel>
+                            {valuesGroups[0]}
+                        </AccordionItemPanel>
+                        <AccordionItemPanel>
+                            {valuesGroups[1]}
+                        </AccordionItemPanel>
+                        <AccordionItemPanel>
+                            {valuesGroups[2]}
+                        </AccordionItemPanel>
+                        </AccordionItem>
+                    </AccordionItemPanel>
+                    <AccordionItemPanel>
+                        {values[2]}
+                    </AccordionItemPanel>
+                    <AccordionItemPanel>
+                        <AccordionItem>
+                        <AccordionItemButton>
+                            {values[3]}
+                        </AccordionItemButton>
+                        <AccordionItemPanel>
+                            {valuesUsers[0]}
+                        </AccordionItemPanel>
+                        <AccordionItemPanel>
+                            {valuesUsers[1]}
+                        </AccordionItemPanel>
+                        <AccordionItemPanel>
+                            {valuesUsers[2]}
+                        </AccordionItemPanel>
+                        <AccordionItemPanel>
+                            {valuesUsers[3]}
+                        </AccordionItemPanel>
+                        <AccordionItemPanel>
+                            {valuesUsers[4]}
+                        </AccordionItemPanel>
+                        <AccordionItemPanel>
+                            {valuesUsers[5]}
+                        </AccordionItemPanel>
+                        <AccordionItemPanel>
+                            {valuesUsers[6]}
+                        </AccordionItemPanel>
+                        <AccordionItemPanel>
+                            {valuesUsers[7]}
+                        </AccordionItemPanel>
+                        </AccordionItem>
+                    </AccordionItemPanel>
+                    <AccordionItemPanel>
+                        <d>Инструкции к данной детали - </d>
+                        <Button to="route" target="_blank" onClick={() => {window.open("http://localhost:9090/intstruction/Chertezh.pdf")}} > Чертеж.pdf </Button>
+                        <d>         </d>
+                        <Button to="route" target="_blank" onClick={() => {window.open("http://localhost:9090/intstruction/PSE-A-75-00-01-00R-720A-A.pdf")}} > PSE-A-75-00-01-00R-720A-A.pdf </Button>
+                        </AccordionItemPanel>    
+                </AccordionItem>,
+               )
+            } else {
             array.push(
                 <AccordionItem>
                 <AccordionItemHeading>
@@ -190,16 +261,10 @@ class ItemList extends Component {
                     </AccordionItemPanel>
                     </AccordionItem>
                 </AccordionItemPanel>  
-                <AccordionItemPanel>
-                <d>Инструкции к данной детали - </d>
-                <Button to="route" target="_blank" onClick={() => {window.open("http://localhost:9090/intstruction/Chertezh.pdf")}} > Чертеж.pdf </Button>
-                <d>         </d>
-                <Button to="route" target="_blank" onClick={() => {window.open("http://localhost:9090/intstruction/PSE-A-75-00-01-00R-720A-A.pdf")}} > PSE-A-75-00-01-00R-720A-A.pdf </Button>
-                </AccordionItemPanel>  
             </AccordionItem>,
-           )
+           )}
            values.length = 0
-           if (count !== 12) count++
+           if (count !== 11) count++
         })
         return (
             <div>

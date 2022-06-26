@@ -30,6 +30,11 @@ class AppHeader extends Component {
         this.setState({ showModal: true });
     }
 
+    leftAccount() {
+        localStorage.clear()
+        window.location.reload();
+    }
+
     render() {
         let menuItems;
         if(localStorage.getItem('Name')) {
@@ -50,7 +55,7 @@ class AppHeader extends Component {
                     <div>Домашняя папка - {localStorage.getItem('HomeFolder')}</div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={this.close}>Закрыть</Button>
+                    <Button onClick={this.leftAccount}>Выйти из аккаунта</Button>
                 </Modal.Footer>
             </Modal>
             ];

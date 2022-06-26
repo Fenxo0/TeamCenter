@@ -10,10 +10,16 @@ class AllPages extends Component {
 		this.setState({ numPages });
 	};
 
-	goToPrevPage = () =>
+	goToPrevPage = () => {
+		if (this.state.pageNumber != 1) {
 		this.setState((state) => ({ pageNumber: state.pageNumber - 1 }));
-	goToNextPage = () =>
-		this.setState((state) => ({ pageNumber: state.pageNumber + 1 }));
+	}
+	}
+	goToNextPage = () => {
+		if (this.state.pageNumber != this.state.numPages) {
+			this.setState((state) => ({ pageNumber: state.pageNumber + 1 }));
+		}
+	}	
 
 	render() {
 		const { pageNumber, numPages } = this.state;

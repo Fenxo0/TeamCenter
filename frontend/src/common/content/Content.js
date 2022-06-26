@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import "./Content.css"
 import {Button, Col, Container, Form, FormControl} from "react-bootstrap";
 import {Formik} from "formik";
+import {toast} from "react-toastify";
 import { VALIDATION_SEARCH } from "../../model/auth/validatonShema";
 import ItemList from "../../model/item/ItemList";
 
@@ -10,6 +11,7 @@ class Content extends Component {
         super();
         this.state = {
             searchOptions: null,
+            arrayItems: []
         }
         //localStorage.clear()
         this.changeSearchOptions = this.changeSearchOptions.bind(this);
@@ -30,7 +32,19 @@ class Content extends Component {
                         validationSchema ={VALIDATION_SEARCH}
                         onSubmit={(values, {setSubmitting, resetForm}) => {
                             console.log(JSON.stringify(values));
-                            this.changeSearchOptions(values);
+                            if (localStorage.getItem('Session') == null) {
+                                toast.error(
+                                    "Авторизируйтесь в систему!",
+                                    {position: toast.POSITION.BOTTOM_LEFT}
+                                )
+                            } else {
+                                debugger
+                                this.state.arrayItems = []
+                                this.state.arrayItems.push(
+                                    <ItemList searchOptions={values}/>
+                                )
+                                //this.changeSearchOptions(values);
+                            }
                         }}
                     >
                         {({
@@ -102,11 +116,7 @@ class Content extends Component {
                     </Formik>
                 </Container>
                 {
-                    this.state.searchOptions ? (
-                        <ItemList searchOptions={this.state.searchOptions} type={"OFFERS_BY_SEARCH_PARAMS"}/>
-                    ) : (
-                        <ItemList type={"ALL_OFFERS"}/>
-                    )
+                    this.state.arrayItems
                 }
             </Container>
         )

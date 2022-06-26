@@ -294,7 +294,12 @@ public class TeamcenterServiceV1 implements TeamcenterService {
                                 break;
                             case "owning_user":
                                 user = objectElement.getAttribute("uiValue");
-                                Element userElement = (Element) newElement.getElementsByTagName("ns0:values").item(j);
+                                Element userElement;
+                                if (desc != null && desc.equals("94-10-965")) {
+                                    userElement = (Element) newElement.getElementsByTagName("ns0:values").item(10);
+                                } else {
+                                    userElement = (Element) newElement.getElementsByTagName("ns0:values").item(9);
+                                }
                                 String uuidUser = userElement.getAttribute("value");
                                 if (!uuidUser.equals("SPB5_Doc") && !uuidUser.equals("P181_СР-P181 Спецификация распределения")) {
                                     users.addAll(gettingUser(uuidUser, session));
@@ -393,8 +398,7 @@ public class TeamcenterServiceV1 implements TeamcenterService {
                     "Имя - " + person + ";" +
                     "Имя в ОС - " + userId + ";" +
                     "Объект - " + username + " (" + userId + ")" + ";" +
-                    "Персона - " + person + ";" +
-                    "Идентификатор - " + userId + ";";
+                    "Персона - " + person + ";";
 
             users.add(object);
         }
